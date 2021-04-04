@@ -37,23 +37,22 @@ class OrdersComponent extends PureComponent {
 
     return (
       <>
-        {status === 'active' &&
-          <RectButton style={styles.leftAction} onPress={() => Alert.alert(
+        {(status === 'active' || status === 'finished') &&
+          <RectButton style={[styles.leftAction, {backgroundColor: colors.GREEN}]} onPress={() => Alert.alert(
             null,
-            "Esta seguro que desea cancelar la orden?",
+            "Esta seguro que desea entregar la orden?",
             [
               {
-                text: "Cancel",
+                text: "Cancelar",
                 style: "cancel"
               },
               {
                 text: "Aceptar",
-                onPress: () => changeStatusAction(id, 'cancel')
+                onPress: () => changeStatusAction(id, 'paid')
               },
             ],
-            { cancelable: false }
           )}>
-            <Text style={{color: colors.WHITE}}>Cancelar</Text>
+            <Text style={{color: colors.WHITE}}>Pagado</Text>
           </RectButton>
         }
       </>
@@ -65,29 +64,13 @@ class OrdersComponent extends PureComponent {
 
     return (
       <>
-        <RectButton style={[styles.leftAction, {backgroundColor: colors.GREEN}]} onPress={() => Alert.alert(
-          null,
-          "Esta seguro que desea entregar la orden?",
-          [
-            {
-              text: "Cancel",
-              style: "cancel"
-            },
-            {
-              text: "Aceptar",
-              onPress: () => changeStatusAction(id, 'paid')
-            },
-          ],
-        )}>
-          <Text style={{color: colors.WHITE}}>Pagar</Text>
-        </RectButton>
         {status === 'active' &&
           <RectButton style={[styles.leftAction, {backgroundColor: colors.PRIMARY}]} onPress={() => Alert.alert(
             null,
             "Esta seguro que desea terminar la orden?",
             [
               {
-                text: "Cancel",
+                text: "Cancelar",
                 style: "cancel"
               },
               {
